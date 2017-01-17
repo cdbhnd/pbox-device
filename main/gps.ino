@@ -102,7 +102,7 @@ struct Locations parseGPGGA(const char* GPGGAstr)
     }
     else 
     {
-      Serial.printf("Satellites not yet fixed!");
+      Serial.printf("Satellites not yet fixed!\n");
 
       return loc;
     };
@@ -127,8 +127,9 @@ struct Locations getGpsData() {
   location = parseGPGGA((const char*)info.GPGGA);
   
   if(location.satellite_status == 0)
-  {
-    return getGpsData();
+  {   
+       delay(1000);
+       return getGpsData();
   }
   else
   {
