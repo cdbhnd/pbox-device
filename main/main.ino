@@ -38,6 +38,10 @@ double latitude;
 double longitude;
 String gpsCoords;
 
+///////// GPRS_VARIABLES /////////
+char apn[] = "NET";
+char username[] = "telenor";
+char password[] = "gprs";
 //////////////////////////////////
 
 void callback(char* topic, byte* payload, unsigned int length);

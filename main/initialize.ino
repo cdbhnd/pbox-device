@@ -23,7 +23,7 @@ void initializeGPRS()
 {
   Serial.println("GPRS connecting ...");
 
-  while(!LGPRS.attachGPRS("NET","telenor","gprs"))
+  while(!LGPRS.attachGPRS(apn,username,password))
   {
     Serial.println("connecting ...");
     delay(1000);
