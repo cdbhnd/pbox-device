@@ -7,7 +7,7 @@
 #include <ATT_IOT.h>
 
 #define httpServer "api.AllThingsTalk.io"                  
-#define mqttServer httpServer 
+#define mqttServer "broker.smartliving.io" 
 
 ///////// DEVICE_VARIABLES /////////
 char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv";
