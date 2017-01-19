@@ -8,22 +8,6 @@ void emitGPS()
   
 };
 
-void emitTemperature()
-{
-  
-  getTemperature();
-  
-  Device.Send(String(temperatureData), dhtId);
-};
-
-
-void emitBattery()
-{
-  getBattery();
-  
-  Device.Send(String(battery), batId);
-};
-
 void emitAcceleration()
 {
   getAcceleration();

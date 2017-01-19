@@ -1,8 +1,6 @@
 void initializeBoard() {
   emitting = 0;
   fixed = 0;
-
-  bar.begin();
   
 //  Serial.begin(115200);
 //  while(!Serial);
@@ -32,11 +30,6 @@ void initializeGPRS()
   }
   
 //  Serial.println("GPRS connected");
-};
-
-void initializeDHT()
-{
-  dht.begin();
 };
 
 void initializeAccelerometer()
@@ -98,8 +91,6 @@ void initializeDevice()
     
   Device.AddAsset(id, "gps", "Global Positioning System", false, "string");
   Device.AddAsset(actId, "switch", "turning on and off emitting", true, "boolean");
-  Device.AddAsset(dhtId, "dht", "temperature and humidity sensor", false, "string");
-  Device.AddAsset(batId, "battery", "battery status", false, "string");
   Device.AddAsset(accId, "acceleromaeter", "acceleration", false, "string");
   
   while(!Device.Subscribe(pubSub))
