@@ -22,12 +22,12 @@ void callback(char* topic, byte* payload, unsigned int length)
     if (pinNr == actId)
     {
       if (msgString == "false") {
-        Serial.println("Emitting OFF");  
+//        Serial.println("Emitting OFF");  
         idOut = &actId;
         emitting = 0;                             
       }
       else if (msgString == "true") {
-        Serial.println("Emitting ON");
+//        Serial.println("Emitting ON");
         idOut = &actId;
         emitting = 1;
       }
