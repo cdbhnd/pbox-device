@@ -68,6 +68,8 @@ void parseGPGGA(const char* GPGGAstr)
 
     if(satellite_status != 0)
     {
+      bar.setBits(0x3ff);
+      
       tmp = getComma(2, GPGGAstr);
       latitude = getDoubleNumber(&GPGGAstr[tmp]) * 0.01;
       tmp = getComma(4, GPGGAstr);
@@ -82,6 +84,8 @@ void parseGPGGA(const char* GPGGAstr)
     }
     else 
     {
+      bar.setBits(random(1024));
+      
       fixed = 0;
       setLoopInterval(fixingDelay);
 
@@ -104,6 +108,29 @@ void getGpsData()                           // use this method to acquire gps co
   parseGPGGA((const char*)info.GPGGA);
 }
 
+void getTemperature()
+{
+  dht.readHT(&temperature, &humidity);
+
+  if (isnan(temperature) || isnan(humidity)) 
+    {
+      temperatureData = "0.0";
+//        Serial.println("Failed to read from DHT");
+    } 
+    else 
+    {
+        sprintf(buff, "%4.2fC,%4.2f%%\0", temperature, humidity);
+
+        temperatureData = buff;
+    }
+};
+
+void getBattery()
+{
+  sprintf(battery,"%d%%\0", LBattery.level());
+
+};
+
 void getAcceleration()
 {
   adxl.readXYZ(&x, &y, &z);
@@ -116,4 +143,4 @@ void getAcceleration()
   sprintf(buff, "%6.3fg,%6.3fg,%6.3fg\0", ax, ay, az);
 
   accelerationData = buff;  
-};
+}
