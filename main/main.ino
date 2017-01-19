@@ -8,6 +8,8 @@
 #include <Grove_LED_Bar.h>
 #include <DHT.h>
 #include <LBattery.h>
+#include <Wire.h>
+#include <ADXL345.h>
 
 #define httpServer "api.AllThingsTalk.io"                  
 #define mqttServer "broker.smartliving.io"
@@ -26,6 +28,15 @@ String temperatureData;
 ///////// BATTERY /////////
 char battery[256];
 
+///////// ACCELEROMETER /////////
+ADXL345 adxl;
+int x;
+int y;
+int z;
+double xyz[3];
+double ax,ay,az;
+String accelerationData;
+
 ///////// DEVICE_VARIABLES /////////
 char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv";
 char clientId[] = "ognjent_EjGwg4VW";
@@ -37,6 +48,8 @@ int id = 2;           // GPS sensor
 int actId = 3;        // Switch actuator
 int dhtId = 4;        // DHT sensor
 int batId = 5;        // Battery
+int accId = 6;         // Accelerometer 
+
 
 ///////// FLAGS /////////
 int emitting;         
@@ -77,6 +90,7 @@ void setup()
   initializeGPS();
   initializeGPRS();
   initializeDHT();
+  initializeAccelerometer();
   initializeDevice();
 }
 
@@ -90,6 +104,7 @@ void loop()
       emitGPS();
       emitTemperature();
       emitBattery();
+      emitAcceleration();
       
       newTime = curTime; 
     };

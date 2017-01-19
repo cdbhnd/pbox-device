@@ -128,4 +128,19 @@ void getTemperature()
 void getBattery()
 {
   sprintf(battery,"%d%%\0", LBattery.level());
+
 };
+
+void getAcceleration()
+{
+  adxl.readXYZ(&x, &y, &z);
+
+  adxl.getAcceleration(xyz);
+  ax = xyz[0];
+  ay = xyz[1];
+  az = xyz[2];
+
+  sprintf(buff, "%6.3fg,%6.3fg,%6.3fg\0", ax, ay, az);
+
+  accelerationData = buff;  
+}

@@ -2,10 +2,10 @@ void emitGPS()
 {
   getGpsData();
   
-  if (fixed == 1){
+  if (fixed == 1)
+  {
     Device.Send(String(gpsCoords), id);
   };
-  
 };
 
 void emitTemperature()
@@ -16,7 +16,6 @@ void emitTemperature()
   Device.Send(String(temperatureData), dhtId);
 };
 
-
 void emitBattery()
 {
   getBattery();
@@ -24,4 +23,10 @@ void emitBattery()
   Device.Send(String(battery), batId);
 };
 
+void emitAcceleration()
+{
+  getAcceleration();
+
+  Device.Send(String(accelerationData), accId);
+};
 
