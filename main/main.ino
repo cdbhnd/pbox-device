@@ -21,7 +21,7 @@
 #define httpServer "api.AllThingsTalk.io"                  
 #define mqttServer "broker.smartliving.io"
 
-//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
+char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
 //char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
@@ -45,8 +45,8 @@ Grove_LED_Bar bar(9, 8, 0);
 int emitting;         // Emitting data to ATT
 int fixed;            // Satellites fix position
 int logging;          // Logging data
-int batteryLevel;       
-int batteryCharging;
+int batteryLevel1;       
+int batteryCharging1;
 
 ///////// LOOP /////////
 int interval;

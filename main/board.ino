@@ -18,10 +18,10 @@ void emitBattery()
 
 void checkBatteryStatus()
 {
-  batteryLevel = LBattery.level();
-  batteryCharging = LBattery.isCharging();
+  batteryLevel1 = LBattery.level();
+  batteryCharging1 = LBattery.isCharging();
 
-  if(batteryLevel == 0 && batteryCharging == 0)
+  if(batteryLevel1 == 0 && batteryCharging1 == 0)
   {
     emitting = 0;
     Device.Send(String("false"), actId);
