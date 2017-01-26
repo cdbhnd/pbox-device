@@ -13,6 +13,20 @@ void emitBattery()
   getBattery();
   
   Device.Send(String(batt), batId);
+
+};
+
+void checkBatteryStatus()
+{
+  batteryLevel = LBattery.level();
+  batteryCharging = LBattery.isCharging();
+
+  if(batteryLevel == 0 && batteryCharging == 0)
+  {
+    emitting = 0;
+    Device.Send(String("false"), actId);
+    Device.Send(String("Low batter, connect charger."), batId);
+  };
 };
 
 void initializeBoard() {
