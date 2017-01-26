@@ -46,7 +46,6 @@ void callback(char* topic, byte* payload, unsigned int length)
         logging = 1;
       }
     }
-    setLoopInterval(offDelay);
   }
   if(idOut != NULL)                //also let the iot platform know that the operation was succesful: give it some feedback. This also allows the iot to update the GUI's correctly & run scenarios.
     Device.Send(msgString, *idOut); 

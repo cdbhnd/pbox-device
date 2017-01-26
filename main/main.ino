@@ -3,11 +3,14 @@
 #include <LGPRSClient.h>
 #include <LGPRSServer.h>
 #include <LGPRSUdp.h>
+#include <LTask.h>
+#include <LWiFi.h>
+#include <LWiFiClient.h>
 #include <PubSubClient.h>
 #include <ATT_IOT.h>
 #include <Grove_LED_Bar.h>
-#include <DHT.h>
 #include <LBattery.h>
+#include <DHT.h>
 #include <Wire.h>
 #include <ADXL345.h>
 #include <LFlash.h>
@@ -18,7 +21,8 @@
 #define httpServer "api.AllThingsTalk.io"                  
 #define mqttServer "broker.smartliving.io"
 
-char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv";
+//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
+//char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
 ATTDevice Device(deviceId, clientId, clientKey);
@@ -44,7 +48,6 @@ int logging;          // Logging data
 
 ///////// LOOP /////////
 int interval;
-int offDelay = 3000;
 int fixingDelay = 1000;
 int emittingDelay = 20000;
 unsigned long newTime;
@@ -62,7 +65,8 @@ void setup()
   initializeLog();
   initializeLED();  
   initializeGPS();
-  initializeGPRS();
+//  initializeWIFI();
+//  initializeGPRS();
   initializeDHT();
   initializeAccelerometer();
   initializeATT();
