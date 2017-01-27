@@ -25,7 +25,7 @@ void checkBatteryStatus()
   {
     emitting = 0;
     Device.Send(String("false"), actId);
-    Device.Send(String("Low batter, connect charger."), batId);
+    Device.Send(String("Connect charger"), batId);
   };
 };
 
