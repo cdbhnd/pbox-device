@@ -45,6 +45,8 @@ Grove_LED_Bar bar(9, 8, 0);
 int emitting;         // Emitting data to ATT
 int fixed;            // Satellites fix position
 int logging;          // Logging data
+int batLevel;       
+int batCharging;
 
 ///////// LOOP /////////
 int interval;
@@ -76,6 +78,8 @@ void loop()
 {
   curTime = millis();
   
+  checkBatteryStatus();
+  
   if (emitting == 1) {
     if (curTime > (newTime + interval))
     {
@@ -94,8 +98,7 @@ void loop()
   } else {
     turnOffLedBar();
   };
-  
-  
+
   Device.Process(); 
 }
 
