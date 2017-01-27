@@ -68,7 +68,7 @@ void setup()
 //  initializeWIFI();
 //  initializeGPRS();
   initializeDHT();
-  initializeAccelerometer();
+// initializeAccelerometer();
   initializeATT();
 }
 
@@ -82,7 +82,7 @@ void loop()
       emitBattery();
       emitGPS();
       emitDHT();
-      emitAcceleration();
+   // emitAcceleration();
       
       if(logging == 1)
       {
