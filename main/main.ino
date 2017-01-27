@@ -45,8 +45,8 @@ Grove_LED_Bar bar(9, 8, 0);
 int emitting;         // Emitting data to ATT
 int fixed;            // Satellites fix position
 int logging;          // Logging data
-int batteryLevel1;       
-int batteryCharging1;
+int batLevel;       
+int batCharging;
 
 ///////// LOOP /////////
 int interval;

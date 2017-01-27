@@ -4,8 +4,7 @@ char batt[256];
 /////////////////////
 void getBattery()
 {
-  sprintf(batt,"%d%%\0", LBattery.level());
-
+  sprintf(batt,"%d%%,%d\0", LBattery.level(), LBattery.isCharging());
 };
 
 void emitBattery()
@@ -18,14 +17,16 @@ void emitBattery()
 
 void checkBatteryStatus()
 {
-  batteryLevel1 = LBattery.level();
-  batteryCharging1 = LBattery.isCharging();
+  batLevel = LBattery.level();
+  batCharging = LBattery.isCharging();
 
-  if(batteryLevel1 == 0 && batteryCharging1 == 0)
+  sprintf(batt,"%d%%,%d\0", LBattery.level(), LBattery.isCharging());  
+
+  if(batLevel == 0 && batCharging == 0)
   {
     emitting = 0;
     Device.Send(String("false"), actId);
-    Device.Send(String("Connect charger"), batId);
+    Device.Send(String(batt), batId);
   };
 };
 
