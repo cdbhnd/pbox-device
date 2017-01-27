@@ -50,8 +50,8 @@ int batCharging;
 
 ///////// LOOP /////////
 int interval;
-int fixingDelay = 1000;
-int emittingDelay = 20000;
+int fixingDelay = 3000;
+int emittingDelay = 10000;
 unsigned long newTime;
 unsigned long curTime;
 
@@ -70,7 +70,7 @@ void setup()
 //  initializeWIFI();
 //  initializeGPRS();
   initializeDHT();
-  initializeAccelerometer();
+// initializeAccelerometer();
   initializeATT();
 }
 
@@ -86,7 +86,7 @@ void loop()
       emitBattery();
       emitGPS();
       emitDHT();
-      emitAcceleration();
+   // emitAcceleration();
       
       if(logging == 1)
       {
