@@ -48,8 +48,8 @@ int logging;          // Logging data
 
 ///////// LOOP /////////
 int interval;
-int fixingDelay = 1000;
-int emittingDelay = 20000;
+int fixingDelay = 3000;
+int emittingDelay = 10000;
 unsigned long newTime;
 unsigned long curTime;
 
