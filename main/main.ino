@@ -22,7 +22,7 @@
 #define mqttServer "broker.smartliving.io"
 
 //char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
-//char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
+char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
 ATTDevice Device(deviceId, clientId, clientKey);
@@ -67,7 +67,7 @@ void setup()
   initializeLog();
   initializeLED();  
   initializeGPS();
-//  initializeWIFI();
+  initializeWIFI();
 //  initializeGPRS();
   initializeDHT();
 // initializeAccelerometer();

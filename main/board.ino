@@ -22,10 +22,13 @@ void checkBatteryStatus()
 
   if(batLevel == 0 && batCharging == 0)
   {
-    emitting = 0;
-    Device.Send(String("false"), actId);
-    sprintf(batt,"%d%%,%d\0", LBattery.level(), LBattery.isCharging());  
-    Device.Send(String(batt), batId);
+    if(emitting == 1) 
+    {
+      emitting = 0;
+      Device.Send(String("false"), actId);
+      sprintf(batt,"%d%%,%d\0", LBattery.level(), LBattery.isCharging());  
+      Device.Send(String(batt), batId);
+    };
   };
 };
 
