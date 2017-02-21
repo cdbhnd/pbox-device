@@ -59,11 +59,11 @@ void initializeATT()
 //    Serial.println("retrying ...");
   };
     
-  Device.AddAsset(gpsId, "gps", "Global Positioning System", false, "string");
-  Device.AddAsset(actId, "switch", "turning on and off emitting", true, "boolean");
-  Device.AddAsset(dhtId, "dht", "temperature and humidity sensor", false, "string");
-  Device.AddAsset(batId, "battery", "battery status", false, "string");
-  Device.AddAsset(accId, "acceleromaeter", "acceleration", false, "string");
+  Device.AddAsset(gpsId, "GPS", "Global Positioning System", false, "string");
+  Device.AddAsset(actId, "ACTIVATOR", "turning on and off emitting", true, "boolean");
+  Device.AddAsset(dhtId, "TEMPERATURE", "temperature and humidity sensor", false, "string");
+  Device.AddAsset(batId, "BATTERY", "battery status", false, "string");
+  Device.AddAsset(accId, "ACCELEROMETER", "acceleration", false, "string");
   Device.AddAsset(logId, "log", "logging data", true, "boolean");
 
   while(!Device.Subscribe(pubSub))

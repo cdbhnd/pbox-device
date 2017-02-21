@@ -6,11 +6,11 @@
 /////////////////////
 void initializeWIFI()
 {
-//  Serial.println("starting");
+  Serial.println("starting");
   LWiFi.begin();   
-//  Serial.print("Connecting to WiFi AP: ");
-//  Serial.println(WIFI_AP);
+  Serial.print("Connecting to WiFi AP: ");
+  Serial.println(WIFI_AP);
   while (0 == LWiFi.connect(WIFI_AP, LWiFiLoginInfo(WIFI_AUTH, WIFI_PASSWORD)))
     delay(1000);
-//  Serial.println("connected");
+  Serial.println("connected");
 };
