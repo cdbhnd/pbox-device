@@ -121,8 +121,8 @@ void getGpsData()
 {
   LGPS.getData(&info);
   
-//  Serial.println("RAW data: ");
-//  Serial.println((char*)info.GPGGA); 
+  Serial.println("RAW data: ");
+  Serial.println((char*)info.GPGGA); 
   
   sat_num = getData(&info);
 
