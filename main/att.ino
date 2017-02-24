@@ -23,12 +23,12 @@ void callback(char* topic, byte* payload, unsigned int length)
     if (pinNr == actId)
     {
       if (msgString == "false") {
-//        Serial.println("Emitting OFF");  
+        Serial.println("Emitting OFF");  
         idOut = &actId;
         emitting = 0;                             
       }
       else if (msgString == "true") {
-//        Serial.println("Emitting ON");
+        Serial.println("Emitting ON");
         idOut = &actId;
         emitting = 1;
       }
@@ -56,22 +56,24 @@ void initializeATT()
 {
   while(!Device.Connect(&c, httpServer))
   {
-//    Serial.println("retrying ...");
+      //Serial.println("retrying ...");
   };
     
-  Device.AddAsset(gpsId, "gps", "Global Positioning System", false, "string");
-  Device.AddAsset(actId, "switch", "turning on and off emitting", true, "boolean");
-  Device.AddAsset(dhtId, "dht", "temperature and humidity sensor", false, "string");
-  Device.AddAsset(batId, "battery", "battery status", false, "string");
-  Device.AddAsset(accId, "acceleromaeter", "acceleration", false, "string");
+  Device.AddAsset(gpsId, "GPS", "Global Positioning System", false, "string");
+  Device.AddAsset(actId, "ACTIVATOR", "turning on and off emitting", true, "boolean");
+  Device.AddAsset(dhtId, "TEMPERATURE", "temperature and humidity sensor", false, "string");
+  Device.AddAsset(batId, "BATTERY", "battery status", false, "string");
+  Device.AddAsset(accId, "ACCELEROMETER", "acceleration", false, "string");
   Device.AddAsset(logId, "log", "logging data", true, "boolean");
+};
 
+void subscribeOnATTEvents() {
   while(!Device.Subscribe(pubSub))
   {
-//    Serial.println("retrying ...");
+    Serial.println("retrying ...");
   };
   
   Device.Send(String("false"), actId);
   Device.Send(String("false"), logId);
-//  Serial.println("ACTIVE!!!");
-};
+}
+

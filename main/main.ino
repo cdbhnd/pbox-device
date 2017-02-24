@@ -21,14 +21,21 @@
 #define httpServer "api.AllThingsTalk.io"                  
 #define mqttServer "broker.smartliving.io"
 
-// char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
-// char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
+///////// PBOX_VARIABLES ////////
+#define PBOX_SERVER "192.168.10.65"//"pbox-test.herokuapp.com"
+#define PBOX_SERVER_PORT 8080
+
+//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
+char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
 ATTDevice Device(deviceId, clientId, clientKey);
 
 void callback(char* topic, byte* payload, unsigned int length);
-LGPRSClient c;
+
+//LGPRSClient c;
+LWiFiClient c;
+
 PubSubClient pubSub(mqttServer, 1883, callback, c);
 
 int gpsId = 2;        // GPS sensor
@@ -67,11 +74,15 @@ void setup()
   initializeLog();
   initializeLED();  
   initializeGPS();
-//  initializeWIFI();
-// initializeGPRS();
   initializeDHT();
-// initializeAccelerometer();
+//initializeAccelerometer();  
+
+  initializeWIFI(); //WIFI CONNECTION
+  //initializeGPRS(); //GPRS CONNECTION   
+ 
   initializeATT();
+  createBox("cloneBox", deviceId);
+  subscribeOnATTEvents();
 }
 
 void loop()
