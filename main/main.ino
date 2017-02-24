@@ -22,8 +22,8 @@
 #define mqttServer "broker.smartliving.io"
 
 ///////// PBOX_VARIABLES ////////
-#define PBOX_SERVER "192.168.10.65"//"pbox-test.herokuapp.com"
-#define PBOX_SERVER_PORT 8080
+#define PBOX_SERVER "pbox-test.herokuapp.com"
+#define PBOX_SERVER_PORT 80
 
 //char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
 char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
