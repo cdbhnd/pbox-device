@@ -33,8 +33,8 @@ ATTDevice Device(deviceId, clientId, clientKey);
 
 void callback(char* topic, byte* payload, unsigned int length);
 
-//LGPRSClient c;
-LWiFiClient c;
+LGPRSClient c;
+//LWiFiClient c;
 
 PubSubClient pubSub(mqttServer, 1883, callback, c);
 
@@ -77,8 +77,8 @@ void setup()
   initializeDHT();
 //initializeAccelerometer();  
 
-  initializeWIFI(); //WIFI CONNECTION
-  //initializeGPRS(); //GPRS CONNECTION   
+  //initializeWIFI(); //WIFI CONNECTION
+  initializeGPRS(); //GPRS CONNECTION   
  
   initializeATT();
   createBox("cloneBox", deviceId);
