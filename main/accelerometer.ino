@@ -1,6 +1,6 @@
 ///// VARIABLES /////
 ADXL345 adxl;
-int accelerometerThreshold = 20;
+int accelerometerThreshold = 1;
 char acce[256];
 char vib[5];
 int x;
@@ -18,6 +18,7 @@ void getAcceleration()
   adxl.getAcceleration(accelerometerAcceleration);
 
   double difference = 0;
+  int numberOfAxis = 0;
 
   if (accelerometerAcceleration[0] >= prevAccelerometerAcceleration[0]) {
     difference = accelerometerAcceleration[0] - prevAccelerometerAcceleration[0];
@@ -26,7 +27,7 @@ void getAcceleration()
   }
   if (difference > accelerometerThreshold) {
     prevAccelerometerAcceleration[0] = accelerometerAcceleration[0];
-    vibrating = true;
+    numberOfAxis++;
   }
 
   if (accelerometerAcceleration[1] >= prevAccelerometerAcceleration[1]) {
@@ -36,7 +37,7 @@ void getAcceleration()
   }
   if (difference > accelerometerThreshold) {
     prevAccelerometerAcceleration[1] = accelerometerAcceleration[1];
-    vibrating = true;
+    numberOfAxis++;
   }
 
   if (accelerometerAcceleration[2] >= prevAccelerometerAcceleration[2]) {
@@ -46,6 +47,10 @@ void getAcceleration()
   }
   if (difference > accelerometerThreshold) {
     prevAccelerometerAcceleration[2] = accelerometerAcceleration[2];
+    numberOfAxis++;
+  }
+
+  if (numberOfAxis > 2) {
     vibrating = true;
   }
 

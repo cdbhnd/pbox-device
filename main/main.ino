@@ -25,7 +25,7 @@
 #define PBOX_SERVER "pbox-test.herokuapp.com"
 #define PBOX_SERVER_PORT 80
 
-//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // xyz111
+char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // xyz111
 //char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // cloneBox
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
@@ -33,7 +33,7 @@ ATTDevice Device(deviceId, clientId, clientKey);
 
 void callback(char* topic, byte* payload, unsigned int length);
 
-//LGPRSClient c;
+LGPRSClient c;
 //LWiFiClient c;
 
 PubSubClient pubSub(mqttServer, 1883, callback, c);
@@ -62,8 +62,6 @@ int fixingDelay = 500;
 int emittingDelay = 500;
 unsigned long newTime;
 unsigned long curTime;
-unsigned long newTime2;
-unsigned long curTime2;
 
 void setLoopInterval(int sec) 
 {
@@ -81,11 +79,11 @@ void setup()
   initializeAccelerometer();  
 
 //  initializeWIFI();
-//  initializeGPRS();   
+  initializeGPRS();   
  
   initializeATT();
 //  createBox("cloneBox", deviceId);
-//  createBox("xyz111", deviceId);
+  createBox("xyz111", deviceId);
   subscribeOnATTEvents();
 }
 
