@@ -34,7 +34,7 @@ int getData(gpsSentenceInfoStruct* info)
 //   Serial.println((char*)info->GPGGA);
   if (info->GPGGA[0] == '$')
   {
-    // Serial.print("Parsing GGA data....");
+//    Serial.print("Parsing GGA data....");
     String str = (char*)(info->GPGGA);
     str = str.substring(str.indexOf(',') + 1);
     hour = str.substring(0, 2).toInt() + 1;
@@ -71,11 +71,11 @@ int getData(gpsSentenceInfoStruct* info)
     altitude = str.substring(0, str.indexOf(',')).toFloat();
     str = str.substring(str.indexOf(',') + 3);
     geoid = str.substring(0, str.indexOf(',')).toFloat();
-    // Serial.println("done.");
+//    Serial.println("done.");
     
     if (info->GPRMC[0] == '$')
     {
-    //   Serial.print("Parsing RMC data....");
+//      Serial.print("Parsing RMC data....");
       str = (char*)(info->GPRMC);
       int comma = 0;
       for (int i = 0; i < 60; ++i)
@@ -106,13 +106,13 @@ int getData(gpsSentenceInfoStruct* info)
       date_format += month;
       date_format += "-";
       date_format += day;
-    //   Serial.println("done.");
+//      Serial.println("done.");
       return sat_num;
     }
   }
   else
   {
-    // Serial.println("No GGA data");
+//     Serial.println("No GGA data");
   }
   return 0;
 }
@@ -121,8 +121,8 @@ void getGpsData()
 {
   LGPS.getData(&info);
   
-  Serial.println("RAW data: ");
-  Serial.println((char*)info.GPGGA); 
+//  Serial.println("RAW data: ");
+//  Serial.println((char*)info.GPGGA); 
   
   sat_num = getData(&info);
 

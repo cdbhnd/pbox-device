@@ -1,26 +1,65 @@
 ///// VARIABLES /////
 ADXL345 adxl;
+int accelerometerThreshold = 20;
 char acce[256];
+char vib[5];
 int x;
 int y;
 int z;
-double xyz[3];
-double ax,ay,az;
+double accelerometerAcceleration[3];
+double prevAccelerometerAcceleration[3];
+bool vibrating = false;
 String accelerationData;
+String vibrationData;
 
 /////////////////////
 void getAcceleration()
 {
-  adxl.readXYZ(&x, &y, &z);
+  adxl.getAcceleration(accelerometerAcceleration);
 
-  adxl.getAcceleration(xyz);
-  ax = xyz[0];
-  ay = xyz[1];
-  az = xyz[2];
+  double difference = 0;
 
-  sprintf(acce, "%6.3fg,%6.3fg,%6.3fg\0", ax, ay, az);
+  if (accelerometerAcceleration[0] >= prevAccelerometerAcceleration[0]) {
+    difference = accelerometerAcceleration[0] - prevAccelerometerAcceleration[0];
+  } else {
+    difference = prevAccelerometerAcceleration[0] - accelerometerAcceleration[0];
+  }
+  if (difference > accelerometerThreshold) {
+    prevAccelerometerAcceleration[0] = accelerometerAcceleration[0];
+    vibrating = true;
+  }
 
-  accelerationData = acce;  
+  if (accelerometerAcceleration[1] >= prevAccelerometerAcceleration[1]) {
+    difference = accelerometerAcceleration[1] - prevAccelerometerAcceleration[1];
+  } else {
+    difference = prevAccelerometerAcceleration[1] - accelerometerAcceleration[1];
+  }
+  if (difference > accelerometerThreshold) {
+    prevAccelerometerAcceleration[1] = accelerometerAcceleration[1];
+    vibrating = true;
+  }
+
+  if (accelerometerAcceleration[2] >= prevAccelerometerAcceleration[2]) {
+    difference = accelerometerAcceleration[2] - prevAccelerometerAcceleration[2];
+  } else {
+    difference = prevAccelerometerAcceleration[2] - accelerometerAcceleration[2];
+  }
+  if (difference > accelerometerThreshold) {
+    prevAccelerometerAcceleration[2] = accelerometerAcceleration[2];
+    vibrating = true;
+  }
+
+  sprintf(acce, "%4.2f,%4.2f,%4.2f\0", prevAccelerometerAcceleration[0], prevAccelerometerAcceleration[1], prevAccelerometerAcceleration[2]);
+  sprintf(vib, "%d", vibrating);
+//  Serial.println("acce");
+//  Serial.println(acce);
+//  Serial.println("vibrating");
+//  Serial.printf("%d", vibrating);
+//  Serial.println("diference");
+//  Serial.printf("%d", difference);
+
+  accelerationData = acce;
+  vibrationData = vib;  
 }
 
 void emitAcceleration()
@@ -28,6 +67,8 @@ void emitAcceleration()
   getAcceleration();
 
   Device.Send(String(accelerationData), accId);
+  Device.Send(String(vibrationData), vibId);
+  vibrating = false;
 };
 
 void initializeAccelerometer()

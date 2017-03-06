@@ -25,15 +25,15 @@
 #define PBOX_SERVER "pbox-test.herokuapp.com"
 #define PBOX_SERVER_PORT 80
 
-//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // box_1
-char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // box_2
+//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // xyz111
+//char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // cloneBox
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
 ATTDevice Device(deviceId, clientId, clientKey);
 
 void callback(char* topic, byte* payload, unsigned int length);
 
-LGPRSClient c;
+//LGPRSClient c;
 //LWiFiClient c;
 
 PubSubClient pubSub(mqttServer, 1883, callback, c);
@@ -44,6 +44,7 @@ int dhtId = 4;        // DHT sensor
 int batId = 5;        // Battery
 int accId = 6;        // Accelerometer
 int logId = 7;        // Log 
+int vibId = 8;        // Vibration
 
 ///////// LED /////////
 Grove_LED_Bar bar(9, 8, 0);
@@ -57,10 +58,12 @@ int batCharging;
 
 ///////// LOOP /////////
 int interval;
-int fixingDelay = 3000;
-int emittingDelay = 10000;
+int fixingDelay = 500;
+int emittingDelay = 500;
 unsigned long newTime;
 unsigned long curTime;
+unsigned long newTime2;
+unsigned long curTime2;
 
 void setLoopInterval(int sec) 
 {
@@ -75,13 +78,14 @@ void setup()
   initializeLED();  
   initializeGPS();
   initializeDHT();
-//initializeAccelerometer();  
+  initializeAccelerometer();  
 
-  //initializeWIFI(); //WIFI CONNECTION
-  initializeGPRS(); //GPRS CONNECTION   
+//  initializeWIFI();
+//  initializeGPRS();   
  
   initializeATT();
-  createBox("cloneBox", deviceId);
+//  createBox("cloneBox", deviceId);
+//  createBox("xyz111", deviceId);
   subscribeOnATTEvents();
 }
 
@@ -97,7 +101,7 @@ void loop()
       emitBattery();
       emitGPS();
       emitDHT();
-//    emitAcceleration();
+      emitAcceleration();
       
       if(logging == 1)
       {

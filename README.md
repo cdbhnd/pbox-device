@@ -14,5 +14,5 @@
 - LED: https://github.com/Seeed-Studio/Grove_LED_Bar.git
 
 ### note:
-- before sketch is uploaded to device, make sure that you uncommented `deviceId` and type of connecting to internet `initializeWIFI()` or `initializeGPRS`.
+- before sketch is uploaded to device, make sure that you uncommented `deviceId`, `createBox()` and type of internet connection.
 - while sketch is uploading, make sure that `Serial monitor` is closed, so it can't block `COM port`.
