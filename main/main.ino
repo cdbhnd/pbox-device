@@ -25,7 +25,7 @@
 #define PBOX_SERVER "pbox-test.herokuapp.com"
 #define PBOX_SERVER_PORT 80
 
-char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // xyz111
+//char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // xyz111
 //char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // cloneBox
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
@@ -33,7 +33,7 @@ ATTDevice Device(deviceId, clientId, clientKey);
 
 void callback(char* topic, byte* payload, unsigned int length);
 
-LGPRSClient c;
+//LGPRSClient c;
 //LWiFiClient c;
 
 PubSubClient pubSub(mqttServer, 1883, callback, c);
@@ -57,16 +57,19 @@ int batLevel;
 int batCharging;
 
 ///////// LOOP /////////
-int interval;
-int fixingDelay = 500;
-int emittingDelay = 500;
-unsigned long newTime;
+int defaultInterval = 10000;
+int intervalBattery = defaultInterval;
+int intervalGPS = defaultInterval;
+int intervalDHT = defaultInterval;
+int intervalAccelerometer = 500;
+int fixingDelay = 1000;
+unsigned long newTimeBattery;
+unsigned long newTimeGPS;
+unsigned long newTimeDHT;
+unsigned long newTimeAccelerometer;
+unsigned long newTimeLog;
 unsigned long curTime;
 
-void setLoopInterval(int sec) 
-{
-  interval = sec;
-};
 //////////////////////////////////
 
 void setup()
@@ -78,12 +81,12 @@ void setup()
   initializeDHT();
   initializeAccelerometer();  
 
-//  initializeWIFI();
-  initializeGPRS();   
+  initializeWIFI();
+//  initializeGPRS();   
  
   initializeATT();
 //  createBox("cloneBox", deviceId);
-  createBox("xyz111", deviceId);
+//  createBox("xyz111", deviceId);
   subscribeOnATTEvents();
 }
 
@@ -94,19 +97,30 @@ void loop()
   checkBatteryStatus();
   
   if (emitting == 1) {
-    if (curTime > (newTime + interval))
+    if (curTime > (newTimeBattery + intervalBattery))
     {
       emitBattery();
+      newTimeBattery = curTime;
+    };
+    if (curTime > (newTimeGPS + intervalGPS))
+    {
       emitGPS();
+      newTimeGPS = curTime;
+    };
+    if (curTime > (newTimeDHT + intervalDHT))
+    {
       emitDHT();
+      newTimeDHT = curTime;
+    };
+    if (curTime > (newTimeAccelerometer + intervalAccelerometer))
+    {
       emitAcceleration();
-      
-      if(logging == 1)
-      {
-        logData();  
-      };
-      
-      newTime = curTime; 
+      newTimeAccelerometer = curTime;
+    };
+    if((logging == 1) && (curTime > newTimeLog + defaultInterval))
+    {
+      logData();
+      newTimeLog = curTime;  
     };
   } else {
     turnOffLedBar();

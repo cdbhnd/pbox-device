@@ -1,10 +1,10 @@
 void createBox(String boxName,char* deviceId) {
   
-//Serial.println("Connecting to PBOX server");
+Serial.println("Connecting to PBOX server");
   
   while (0 == c.connect(PBOX_SERVER, PBOX_SERVER_PORT))
   {
-//    Serial.println("Re-Connecting to PBOX server");
+    Serial.println("Re-Connecting to PBOX server");
     delay(1000);
   } 
  

@@ -135,14 +135,14 @@ void getGpsData()
     gpsCoords += lon_format;
     
     fixed = 1;
-    setLoopInterval(emittingDelay);
+    intervalGPS = defaultInterval;
   }
   else
   {
     bar.setBits(random(1024));
       
     fixed = 0;
-    setLoopInterval(fixingDelay);
+    intervalGPS = fixingDelay;
   };
 }
 
@@ -159,7 +159,7 @@ void emitGPS()
 
 void initializeGPS()
 {  
-  setLoopInterval(1000);
+  intervalGPS = fixingDelay;
   fixed = 0;
   
   LGPS.powerOn();
