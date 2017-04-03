@@ -6,6 +6,7 @@ char vib[5];
 int x;
 int y;
 int z;
+int numberOfMeasurigs = 0;
 double accelerometerAcceleration[3];
 double prevAccelerometerAcceleration[3];
 bool vibrating = false;
@@ -19,6 +20,7 @@ void getAcceleration()
 
   double difference = 0;
   int numberOfAxis = 0;
+
 
   if (accelerometerAcceleration[0] >= prevAccelerometerAcceleration[0]) {
     difference = accelerometerAcceleration[0] - prevAccelerometerAcceleration[0];
@@ -51,7 +53,10 @@ void getAcceleration()
   }
 
   if (numberOfAxis > 2) {
-    vibrating = true;
+    numberOfMeasurigs++;
+    if (numberOfMeasurigs > 1) {
+      vibrating = true;
+    }
   }
 
   sprintf(acce, "%4.2f,%4.2f,%4.2f\0", prevAccelerometerAcceleration[0], prevAccelerometerAcceleration[1], prevAccelerometerAcceleration[2]);
