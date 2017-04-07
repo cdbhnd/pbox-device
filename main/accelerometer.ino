@@ -56,12 +56,6 @@ void getAcceleration()
 
   sprintf(acce, "%4.2f,%4.2f,%4.2f\0", prevAccelerometerAcceleration[0], prevAccelerometerAcceleration[1], prevAccelerometerAcceleration[2]);
   sprintf(vib, "%d", vibrating);
-//  Serial.println("acce");
-//  Serial.println(acce);
-//  Serial.println("vibrating");
-//  Serial.printf("%d", vibrating);
-//  Serial.println("diference");
-//  Serial.printf("%d", difference);
 
   accelerationData = acce;
   vibrationData = vib;  

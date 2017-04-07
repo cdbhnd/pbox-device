@@ -16,7 +16,6 @@ void getTemperature()
   if (isnan(temperature) || isnan(humidity)) 
   {
     temperatureData = "0.0C,0.0%%";
-//    Serial.println("Failed to read from DHT");
   } 
   else 
   {

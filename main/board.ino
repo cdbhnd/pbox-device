@@ -34,8 +34,5 @@ void checkBatteryStatus()
 
 void initializeBoard() {
   emitting = 0;
-  
-//  Serial.begin(115200);
-//  while(!Serial);
 };
 

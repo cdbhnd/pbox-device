@@ -15,20 +15,13 @@ void callback(char* topic, byte* payload, unsigned int length)
   {                                                       //put this in a sub block, so any unused memory can be freed as soon as possible, required to save mem while sending data
     int pinNr = Device.GetPinNr(topic, strlen(topic));
     
-//    Serial.print("Payload: ");                            //show some debugging.
-//    Serial.println(msgString);
-//    Serial.print("topic: ");
-//    Serial.println(topic);
-
     if (pinNr == actId)
     {
       if (msgString == "false") {
-//        Serial.println("Emitting OFF");  
         idOut = &actId;
         emitting = 0;                             
       }
       else if (msgString == "true") {
-//        Serial.println("Emitting ON");
         idOut = &actId;
         emitting = 1;
       }
@@ -36,27 +29,27 @@ void callback(char* topic, byte* payload, unsigned int length)
     if (pinNr == logId)
     {
       if (msgString == "false") {
-//        Serial.println("Log OFF");  
         idOut2 = &logId;
         logging = 0;                             
       }
       else if (msgString == "true") {
-//        Serial.println("Log ON");
         idOut2 = &logId;
         logging = 1;
       }
     }
   }
-  if(idOut != NULL)                //also let the iot platform know that the operation was succesful: give it some feedback. This also allows the iot to update the GUI's correctly & run scenarios.
+  if(idOut != NULL) {
+    // also let the iot platform know that the operation was succesful: give it some feedback. This also allows the iot to update the GUI's correctly & run scenarios.
     Device.Send(msgString, *idOut); 
     Device.Send(msgString, *idOut2);   
+  }
 }
 
 void initializeATT()
 {
   while(!Device.Connect(&c, httpServer))
   {
-//      Serial.println("retrying ...");
+    // wait until connection has been established
   };
     
   Device.AddAsset(gpsId, "GPS", "Global Positioning System", false, "string");
@@ -71,7 +64,7 @@ void initializeATT()
 void subscribeOnATTEvents() {
   while(!Device.Subscribe(pubSub))
   {
-//    Serial.println("retrying ...");
+    // wait until subscription has been established
   };
   
   Device.Send(String("false"), actId);

@@ -26,7 +26,7 @@
 #define PBOX_SERVER_PORT 80
 
 //char deviceId[] = "tIfnBDpabrH4K6aF5l2RCAnv"; // xyz111
-//char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // cloneBox
+char deviceId[] = "tBulZIcRpJqgrDcD2EoWxvrf"; // cloneBox
 char clientId[] = "ognjent_EjGwg4VW";
 char clientKey[] = "GsqcBmey";
 ATTDevice Device(deviceId, clientId, clientKey);
@@ -34,7 +34,7 @@ ATTDevice Device(deviceId, clientId, clientKey);
 void callback(char* topic, byte* payload, unsigned int length);
 
 //LGPRSClient c;
-//LWiFiClient c;
+LWiFiClient c;
 
 PubSubClient pubSub(mqttServer, 1883, callback, c);
 
@@ -85,7 +85,7 @@ void setup()
 //  initializeGPRS();   
  
   initializeATT();
-//  createBox("cloneBox", deviceId);
+  createBox("cloneBox", deviceId);
 //  createBox("xyz111", deviceId);
   subscribeOnATTEvents();
 }
